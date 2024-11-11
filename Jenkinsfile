@@ -5,6 +5,7 @@ pipeline {
       //  REGISTRY = "index.docker.io/v1"   // Replace with your registry URL (e.g., Docker Hub or private registry)
         IMAGE_NAME = "nhutlm1/backend" // Replace with your image name
         DOCKER_CREDENTIALS_ID = "docker-credentials" // Jenkins credential ID for Docker registry login
+        TAG = "${env.TAG ?: 'latest'}"  // Default tag to 'latest' if not specified
     }
 
     stages {
@@ -18,6 +19,7 @@ pipeline {
                 script {
                     // Get the short commit hash
                     GIT_COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    TAG =  sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
             }
         }
@@ -43,7 +45,7 @@ pipeline {
         }
          stage('Update docker compose') {
             steps {
-                sh "sed -i 's/\\${TAG}/${TAG}/g' docker-compose.yml"
+                sh "sed -i 's/\\${TAG}/${GIT_COMMIT_HASH}/g' docker-compose.yml"
                 sh "git commit -m 'change tag for docker-compose' -a "
                 sh "git push "
             }

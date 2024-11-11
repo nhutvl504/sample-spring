@@ -19,7 +19,6 @@ pipeline {
                 script {
                     // Get the short commit hash
                     GIT_COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    TAG =  sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
             }
         }

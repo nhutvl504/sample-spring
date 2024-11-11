@@ -5,7 +5,7 @@ pipeline {
       //  REGISTRY = "index.docker.io/v1"   // Replace with your registry URL (e.g., Docker Hub or private registry)
         IMAGE_NAME = "nhutlm1/backend" // Replace with your image name
         DOCKER_CREDENTIALS_ID = "docker-credentials" // Jenkins credential ID for Docker registry login
-        TAG = "${env.TAG ?: 'latest'}"  // Default tag to 'latest' if not specified
+        GIT_COMMIT_HASH=""
     }
 
     stages {

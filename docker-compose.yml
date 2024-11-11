@@ -9,7 +9,7 @@ services:
       - 5432:5432
 
   backend:
-    image: nhutlm1/backend:${TAG}  # Replace with your Spring Boot image name
+    image: nhutlm1/backend:###TAG### # Replace with your Spring Boot image name
     environment:
       - JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/my-app
       - JDBC_DATABASE_USERNAME=postgres

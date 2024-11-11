@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = "your-docker-registry.com"   // Replace with your registry URL (e.g., Docker Hub or private registry)
-        IMAGE_NAME = "your-username/springboot-app" // Replace with your image name
+        REGISTRY = "docker.io"   // Replace with your registry URL (e.g., Docker Hub or private registry)
+        IMAGE_NAME = "nhutlm1/backend" // Replace with your image name
         DOCKER_CREDENTIALS_ID = "docker-credentials" // Jenkins credential ID for Docker registry login
     }
 

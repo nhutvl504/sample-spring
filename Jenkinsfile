@@ -13,12 +13,19 @@ pipeline {
       //          git url: 'https://github.com/nhutvl504/sample-spring.git', branch: 'main' // Replace with your Git repository URL and branch
       //      }
       //  }
-
+       stage('Get Git Commit Hash') {
+            steps {
+                script {
+                    // Get the short commit hash
+                    GIT_COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                }
+            }
+        }
     
         stage('Build Docker Image') {
             steps {
                 script {
-                      dockerImage = docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}")
+                    dockerImage = docker.build("${IMAGE_NAME}:${GIT_COMMIT_HASH}")
                 }
             }
         }

@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = "index.docker.io/v1"   // Replace with your registry URL (e.g., Docker Hub or private registry)
+      //  REGISTRY = "index.docker.io/v1"   // Replace with your registry URL (e.g., Docker Hub or private registry)
         IMAGE_NAME = "nhutlm1/backend" // Replace with your image name
         DOCKER_CREDENTIALS_ID = "docker-credentials" // Jenkins credential ID for Docker registry login
     }
@@ -18,21 +18,22 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER}") // Builds image with tag as build number
+                      dockerImage = docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}")
                 }
             }
         }
 
-         stage('Push to Docker Registry') {
+     
+        stage('Push to Docker Hub') {
             steps {
-                  script {
-                      docker.withRegistry("https://${REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
-                          dockerImage.push() // Pushes the image with the build number tag
-                          dockerImage.push('latest') // Also tag and push as "latest"
-                      }
-                 }
-              }
-       }
+                script {
+                    docker.withRegistry('', "${DOCKER_CREDENTIALS_ID}") { // Empty string defaults to Docker Hub
+                        dockerImage.push() // Pushes the image with the build number tag
+                        dockerImage.push('latest') // Also tag and push as "latest"
+                    }
+                }
+            }
+        }
     }
 
     post {

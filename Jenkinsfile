@@ -41,6 +41,13 @@ pipeline {
                 }
             }
         }
+         stage('Update docker compose') {
+            steps {
+                sh "sed -i 's/\\${TAG}/${TAG}/g' docker-compose.yml"
+                git commit -m "change tag for docker-compose" -a 
+                git push 
+            }
+        }
     }
 
     post {

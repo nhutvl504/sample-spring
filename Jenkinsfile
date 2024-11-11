@@ -45,8 +45,7 @@ pipeline {
          stage('Update docker compose') {
             steps {
                 sh "sed -i 's/\\${TAG}/${GIT_COMMIT_HASH}/g' docker-compose.yml"
-                sh "git commit -m 'change tag for docker-compose' -a "
-                sh "git push "
+                archiveArtifacts artifacts: 'docker-compose.yml', allowEmptyArchive: false
             }
         }
     }

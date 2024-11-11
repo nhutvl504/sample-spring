@@ -44,7 +44,7 @@ pipeline {
         }
          stage('Update docker compose') {
             steps {
-              sh "sed -i 's/\\${TAG}/${GIT_COMMIT_HASH}/g' docker-compose.yml"
+              sh "sed -i 's/\\###TAG###/${GIT_COMMIT_HASH}/g' docker-compose.yml"
             }
         }
     

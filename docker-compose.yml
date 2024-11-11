@@ -2,8 +2,19 @@ services:
   postgres:
     image: postgres:17.0
     environment:
-    - POSTGRES_DB=my-app
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=P4ssword!
+      - POSTGRES_DB=my-app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=P4ssword!
     ports:
-    - 5433:5432
+      - 5432:5432
+
+  backend:
+    image: nhutlm1/backend:${TAG}  # Replace with your Spring Boot image name
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/my-app
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=P4ssword!
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres

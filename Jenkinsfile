@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = "index.docker.io/v1/"   // Replace with your registry URL (e.g., Docker Hub or private registry)
+        REGISTRY = "index.docker.io/v1"   // Replace with your registry URL (e.g., Docker Hub or private registry)
         IMAGE_NAME = "nhutlm1/backend" // Replace with your image name
         DOCKER_CREDENTIALS_ID = "docker-credentials" // Jenkins credential ID for Docker registry login
     }

@@ -8,7 +8,7 @@ pipeline {
         TAG = "${env.TAG ?: 'latest'}"  // Default tag to 'latest' if not specified
     }
 
-    stages {
+  //  stages {
       //  stage('Clone Repository') {
       //      steps {
       //          git url: 'https://github.com/nhutvl504/sample-spring.git', branch: 'main' // Replace with your Git repository URL and branch
@@ -44,11 +44,17 @@ pipeline {
         }
          stage('Update docker compose') {
             steps {
-                sh "sed -i 's/\\${TAG}/${GIT_COMMIT_HASH}/g' docker-compose.yml"
+              sh "sed -i 's/\\${TAG}/${GIT_COMMIT_HASH}/g' docker-compose.yml"
+            }
+        }
+    
+      stage('Get artifact') {
+            steps {
+              
                 archiveArtifacts artifacts: 'docker-compose.yml', allowEmptyArchive: false
             }
         }
-    }
+    
 
     post {
         always {

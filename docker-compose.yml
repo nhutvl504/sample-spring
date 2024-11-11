@@ -11,7 +11,7 @@ services:
   backend:
     image: nhutlm1/backend:${TAG}  # Replace with your Spring Boot image name
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/my-app
+      - JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/my-app
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=P4ssword!
     ports:

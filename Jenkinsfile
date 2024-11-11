@@ -23,16 +23,16 @@ pipeline {
             }
         }
 
- //         stage('Push to Docker Registry') {
- //             steps {
-  //                script {
-  //                    docker.withRegistry("https://${REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
-   //                       dockerImage.push() // Pushes the image with the build number tag
-   //                       dockerImage.push('latest') // Also tag and push as "latest"
-   //                   }
-    //              }
-       //       }
-     //   }
+         stage('Push to Docker Registry') {
+            steps {
+                  script {
+                      docker.withRegistry("https://${REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
+                          dockerImage.push() // Pushes the image with the build number tag
+                          dockerImage.push('latest') // Also tag and push as "latest"
+                      }
+                 }
+              }
+       }
     }
 
     post {
